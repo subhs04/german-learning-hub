@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>German Learning Hub - Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            color: #4a5568;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-bar {
+            background: #e2e8f0;
+            height: 6px;
+            border-radius: 3px;
+            margin: 0.5rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #48bb78, #38a169);
+            height: 100%;
+            width: 35%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .container {
+            padding: 1rem;
+            max-width: 100%;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .topics-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: 1fr;
+        }
+
+        .topic-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .topic-card:active {
+            transform: scale(0.98);
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .topic-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .topic-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 0;
+        }
+
+        .topic-description {
+            color: #4a5568;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .topic-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #718096;
+        }
+
+        .topic-progress {
+            background: #e2e8f0;
+            height: 4px;
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .topic-progress-fill {
+            background: linear-gradient(90deg, #48bb78, #38a169);
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .add-topic-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px dashed #cbd5e0;
+            color: #718096;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px;
+        }
+
+        .add-topic-card:hover {
+            border-color: #667eea;
+            color: #667eea;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .add-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+            
+            .topics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .nav-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-button:hover {
+            background: #5a67d8;
+        }
+
+        .instructions {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .instructions h3 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .instructions p {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🇩🇪 German Learning Hub</h1>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <small>35% Complete</small>
+    </div>
+
+    <div class="container">
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">127</div>
+                <div class="stat-label">Words Learned</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Grammar Rules</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Days Streak</div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 GitHub Pages Setup Instructions</h3>
+            <p><strong>1. Create Repository:</strong> Create a new GitHub repo named "german-learning-hub"</p>
+            <p><strong>2. Enable Pages:</strong> Go to Settings → Pages → Deploy from branch → main</p>
+            <p><strong>3. File Structure:</strong> Create these files in your repo root</p>
+            <p><strong>4. Adding Content:</strong> Copy each page HTML into separate files</p>
+        </div>
+
+        <div class="topics-grid">
+            <!-- Existing Topics -->
+            <a href="family.html" class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-icon">🏠</div>
+                    <h2 class="topic-title">Family & People</h2>
+                </div>
+                <p class="topic-description">Learn family member names, relationships, and personal pronouns</p>
+                <div class="topic-stats">
+                    <span>12 words</span>
+                    <span>80% mastered</span>
+                </div>
+                <div class="topic-progress">
+                    <div class="topic-progress-fill" style="width: 80%"></div>
+                </div>
+            </a>
+
+            <a href="grammar-articles.html" class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-icon">📝</div>
+                    <h2 class="topic-title">Der, Die, Das</h2>
+                </div>
+                <p class="topic-description">Master German articles and noun genders</p>
+                <div class="topic-stats">
+                    <span>3 rules</span>
+                    <span>60% mastered</span>
+                </div>
+                <div class="topic-progress">
+                    <div class="topic-progress-fill" style="width: 60%"></div>
+                </div>
+            </a>
+
+            <a href="food.html" class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-icon">🍎</div>
+                    <h2 class="topic-title">Food & Drinks</h2>
+                </div>
+                <p class="topic-description">Essential vocabulary for meals, drinks, and dining</p>
+                <div class="topic-stats">
+                    <span>20 words</span>
+                    <span>45% mastered</span>
+                </div>
+                <div class="topic-progress">
+                    <div class="topic-progress-fill" style="width: 45%"></div>
+                </div>
+            </a>
+
+            <a href="colors.html" class="topic-card">
+                <div class="topic-header">
+                    <div class="topic-icon">🌈</div>
+                    <h2 class="topic-title">Colors</h2>
+                </div>
+                <p class="topic-description">Learn all the basic colors in German</p>
+                <div class="topic-stats">
+                    <span>10 words</span>
+                    <span>90% mastered</span>
+                </div>
+                <div class="topic-progress">
+                    <div class="topic-progress-fill" style="width: 90%"></div>
+                </div>
+            </a>
+
+            <!-- Add New Topic Card -->
+            <div class="topic-card add-topic-card">
+                <div class="add-icon">➕</div>
+                <h3>Add New Topic</h3>
+                <p>Create a new learning section</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add click handler for the add topic card
+        document.querySelector('.add-topic-card').addEventListener('click', function() {
+            alert('To add a new topic:\n\n1. Create a new HTML file (e.g., "numbers.html")\n2. Copy the topic page template\n3. Add your content\n4. Update this homepage to link to it\n5. Commit to GitHub');
+        });
+    </script>
+</body>
+</html>
